@@ -13,7 +13,7 @@
 
 Pretty simple program that downloads the entire contents of an S3 bucket to a passed directory, and displays a progress bar during the download. The AWS emulated directory structures get created like normal directories.
 
-![demo]https://github.com/shellraiser/aws-s3-bucket-dumper/blob/main/docs/demo.gif
+![demo](https://github.com/shellraiser/aws-s3-bucket-dumper/blob/main/docs/demo.gif)
 
 ### Usage
 * [AWS S3 Bucket Dumper](#s3-dumper)
