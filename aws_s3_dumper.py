@@ -45,18 +45,18 @@ an S3 bucket into a local directory. An optional pre-check for disk space is ava
         precheck_input = input("Perform pre-checks for diskspace (recommended)? y/n: ")
         
         if precheck_input == 'n':
+            total_bytes, objectnum = bucketsize(botosession,s3_bucket)
             break
 
         elif precheck_input == 'y':
-
-            total_bytes = bucketsize(botosession,s3_bucket)
+            total_bytes, objectnum = bucketsize(botosession,s3_bucket)
             checkfreespace(download_directory,total_bytes)
             break
 
         else:
             print("Wrong input entered. Please enter either y or n")
 
-    downloadbucketobjects(botosession,s3_bucket,download_directory)
+    downloadbucketobjects(botosession,s3_bucket,download_directory,objectnum)
 
 if __name__ == "__main__":
    main()

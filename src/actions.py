@@ -2,8 +2,9 @@ import boto3
 import os
 import shutil
 import sys
+from tqdm import tqdm
 
-def downloadbucketobjects(botosession,s3_bucket,download_directory):
+def downloadbucketobjects(botosession,s3_bucket,download_directory,objectnum):
     """Get the list of objects in the bucket, using pagination
     """
 
@@ -35,15 +36,18 @@ def downloadbucketobjects(botosession,s3_bucket,download_directory):
 
     print("Downloading objects from bucket...")
 
-    for object in objects:
-        s3_key = object.key
+    with tqdm(total=(int(objectnum))) as pbar:
 
-        path, filename = os.path.split(s3_key)
-        objectpath = "/".join((downloadpath,path))
-        if len(path) != 0 and not os.path.exists(objectpath):
-            os.makedirs(objectpath)
-        if not s3_key.endswith("/"):
-            download_to = objectpath + '/' + filename if objectpath else filename
-            s3client.download_file(s3_bucket, s3_key, download_to)
+        for o in objects:
+            s3_key = o.key
+            path, filename = os.path.split(s3_key)
+            objectpath = "/".join((downloadpath,path))
+
+            if len(path) != 0 and not os.path.exists(objectpath):
+                os.makedirs(objectpath)
+            if not s3_key.endswith("/"):
+                download_to = objectpath + '/' + filename if objectpath else filename
+                s3client.download_file(s3_bucket, s3_key, download_to)
+                pbar.update(1)
 
     print("All objects have been downloaded.")

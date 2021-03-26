@@ -103,7 +103,7 @@ def bucketsize(botosession,s3_bucket):
         print("Total size of bucket in Bytes: " + str(int(total_bytes)) + "KB")
         print("Total size of bucket in Gigabytes: " + str(int(total_gigs)) + "GB")
 
-        return total_bytes
+        return (total_bytes,objectnum)
 
     except Exception as error:
         print(error)
