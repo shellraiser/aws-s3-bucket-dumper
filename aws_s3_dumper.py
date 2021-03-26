@@ -12,7 +12,6 @@ def main():
     print("--------------------")
     print("This script will download the entire contents of \
 an S3 bucket into a local directory. An optional pre-check for disk space is available.")
-    print("--------------------")
 
     parser.add_section('default')
     parser.set('default', 's3_access_key', 'None')
